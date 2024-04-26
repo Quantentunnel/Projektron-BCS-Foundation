@@ -1,0 +1,47 @@
+# Enter the values for the parameters specified in the comments.
+services:      
+   bcsdb:
+      image: postgres:16.2-alpine
+      container_name: bcs_db
+      environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=VerySecurePassword # Specify a secure password
+        - POSTGRES_DB=bcs
+        - shm-size=256MB
+      networks:
+        bcsnet:
+          ipv4_address: 172.25.0.3
+          
+   bcs_pgadmin4:
+      image: dpage/pgadmin4:latest
+      container_name: bcs_admin4
+      ports:
+        - "8888:80"
+      environment:
+        - PGADMIN_DEFAULT_EMAIL=my@email-address.com
+        - PGADMIN_DEFAULT_PASSWORD=VerySecurePassword # Specify a secure password
+      networks:
+        bcsnet:
+          ipv4_address: 172.25.0.4
+                        
+   bcs:
+     image: quantentunnelhub/projektron-bcs-foundation
+     container_name: bcs_core
+     ports:
+       - "8080:8080"
+     volumes:
+      - /[absolute path]/bcs:/opt/projektron/bcs # Specify the absolute path on your maschine
+      - /[absolute path]/bcs_install:/opt/projektron/bcs_install # Specify the absolute path on your maschine
+      - /[absolute path]/bcs_backups:/opt/projektron/bcs_backups # Specify the absolute path on your maschine
+     networks:
+        bcsnet:
+          ipv4_address: 172.25.0.2
+
+networks:
+   bcsnet:
+      name: bcsnet
+      ipam:
+        driver: default
+        config:
+          - subnet: "172.25.0.0/16"
+            gateway: "172.25.0.1"
