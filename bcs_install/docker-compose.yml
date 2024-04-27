@@ -11,7 +11,10 @@ services:
       networks:
         bcsnet:
           ipv4_address: 172.25.0.3
-          
+  
+   
+   # This container is not needed. 
+   # Therefore, please comment out the following lines if they are not required for you.       
    bcs_pgadmin4:
       image: dpage/pgadmin4:latest
       container_name: bcs_admin4
@@ -25,7 +28,7 @@ services:
           ipv4_address: 172.25.0.4
                         
    bcs:
-     image: quantentunnelhub/projektron-bcs-foundation
+     image: quantentunnelhub/projektron-bcs-foundation:1.0
      container_name: bcs_core
      ports:
        - "8080:8080"
