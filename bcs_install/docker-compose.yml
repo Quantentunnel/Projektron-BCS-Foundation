@@ -28,7 +28,7 @@ services:
           ipv4_address: 172.25.0.4
                         
    bcs:
-     image: quantentunnelhub/projektron-bcs-foundation:1.0
+     image: quantentunnelhub/projektron-bcs-foundation:2.0
      container_name: bcs_core
      ports:
        - "8080:8080"
