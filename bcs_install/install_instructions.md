@@ -28,7 +28,7 @@ docker exec -it bcs_core bash
 cd bcs_install
 ```
 ```bash
-java -jar projektron-bcs-23.4.11-installer.jar -options install_parameter.txt
+java -jar projektron-bcs-23.4.12-installer.jar -options install_parameter.txt
 ```
 
 3. Use predefined projektron.conf
@@ -47,12 +47,14 @@ cp /opt/projektron/bcs_install/projektron.conf /opt/projektron/bcs/conf_local
 /opt/projektron/bcs/tomcat/bin/startup.sh
 ```
 Then wait until tomcat has been completely started. The start process can take up to 5 minutes if your machine if your machine only fullfill the minimum requirements. The tomcat server has started successfully if the machine is listening on port 8005. This can be checked with the following command:
+*Note: As of version 2.0 of the Projektron Core Container, Tomcat is also started automatically when the container is started so that this step is no longer necessary when the container is restarted and if the current Docker Compose File is used.*
 
 ```bash
 netstat -tuln
 ```
 
-2. Start Projektron BCS
+2. (Optional) Start Projektron BCS
+Note: This step is not necessary. With Projektron version 23.4.12 it is even displayed that Projektron has not been started. Nevertheless, the application was started. 
 ```bash
 /opt/projektron/bcs/bin/ProjektronBCS.sh start
 ```
